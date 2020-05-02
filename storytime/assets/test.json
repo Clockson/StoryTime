@@ -1,0 +1,181 @@
+{
+    "scenario": "The Dark Journey of Bob Wilkins",
+    "scripts": {
+        "title": {
+            "type": "title",
+            "titletext": "The Dark Journey of Bob Wilkins",
+            "actions": {
+                "root": {
+                    "options": [
+                        {
+                            "displaytext": "Start",
+                            "action": "title:start"
+                        }
+                    ]
+                },
+                "start": {
+                    "action": "page1:root"
+                }
+            }
+        },
+        "page1": {
+            "type": "story",
+            "chaptertitle": "Ooh, a road!",
+            "storytext": "You find yourself on a road blah, blah, blah",
+            "actions": {
+                "root": {
+                    "options": [
+                        {
+                            "displaytext": "Take the narrow track through the woods.",
+                            "action": "track:root"
+                        },
+                        {
+                            "displaytext": "Continue along the main road.",
+                            "action": "road:root"
+                        },
+                        {
+                            "displaytext": "Enter the shop.",
+                            "action": "shop:root"
+                        }
+                    ]
+                }
+            }
+        },
+        "shop": {
+            "type": "npc",
+            "locationname": "Barnabus' Mice and Melons",
+            "storytext": "You enter the store, it's a bit pongy. The owner stands behind the counter, a huge smile on his face. He seem's not to notice the smell. Or the discomfort it is causing you.",
+            "npcs": {
+                "shopkeeper": {
+                    "name": "Barnabus",
+                    "scripts": {
+                        "welcome": {
+                            "displaytext": "Hey there sport, looking to buy some local specialities?"
+                        },
+                        "goodbye": {
+                            "displaytext": "Welp, sorry to see you leave, take care now."
+                        },
+                        "buymelons": {
+                            "displaytext": "Here you go fella', I used to make lewd comments after I sells these, the wife made me stop though. \"Not professional\" she said. Sigh."
+                        },
+                        "buynails": {
+                            "displaytext": "You'll not find better nails round these parts. Not since \"Quality Nails and Foot Spas\" closed down. Sigh."
+                        },
+                        "buysmallmouse": {
+                            "displaytext": "Aww, He's such a cutey. I'm going to miss you, yes I am, I'll miss you loads. Take good care of him. *sniff*"
+                        }
+                    }
+                }
+            },
+            "actions": {
+                "root": {
+                    "lines": [
+                        "shopkeeper:welcome"
+                    ],
+                    "optiontext": "What will you buy?",
+                    "options": [
+                        {
+                            "displaytext": "A lovely juicy looking melon.",
+                            "action": "shop:buymelon"
+                        },
+                        {
+                            "displaytext": "Some hard looking nails.",
+                            "action": "shop:buynails"
+                        },
+                        {
+                            "displaytext": "A small brown mouse.",
+                            "action": "shop:buysmallmouse"
+                        },
+                        {
+                            "displaytext": "Nothing, it smells rank in here, I'm off.",
+                            "action": "shop:leave"
+                        }
+                    ]
+                },
+                "buymelon": {
+                    "lines": [
+                        "shopkeeper:buymelons"
+                    ],
+                    "optiontext": "What will you buy?",
+                    "options": [
+                        {
+                            "displaytext": "A lovely juicy looking melon.",
+                            "action": "shop:melon"
+                        },
+                        {
+                            "displaytext": "Some hard looking nails.",
+                            "action": "shop:buynails"
+                        },
+                        {
+                            "displaytext": "A small brown mouse.",
+                            "action": "shop:buysmallmouse"
+                        },
+                        {
+                            "displaytext": "Nothing, it smells rank in here, I'm off.",
+                            "action": "shop:leave"
+                        }
+                    ]
+                },
+                "buynails": {
+                    "lines": [
+                        "shopkeeper:buynails"
+                    ],
+                    "optiontext": "What will you buy?",
+                    "options": [
+                        {
+                            "displaytext": "A lovely juicy looking melon.",
+                            "action": "shop:melon"
+                        },
+                        {
+                            "displaytext": "Some hard looking nails.",
+                            "action": "shop:buynails"
+                        },
+                        {
+                            "displaytext": "A small brown mouse.",
+                            "action": "shop:buysmallmouse"
+                        },
+                        {
+                            "displaytext": "Lord, it smells rank in here, I'm off.",
+                            "action": "shop:leave"
+                        }
+                    ]
+                },
+                "buysmallmouse": {
+                    "lines": [
+                        "shopkeeper:buysmallmouse"
+                    ],
+                    "optiontext": "What will you buy?",
+                    "options": [
+                        {
+                            "displaytext": "A lovely juicy looking melon.",
+                            "action": "shop:melon"
+                        },
+                        {
+                            "displaytext": "Some hard looking nails.",
+                            "action": "shop:buynails"
+                        },
+                        {
+                            "displaytext": "A small brown mouse.",
+                            "action": "shop:buysmallmouse"
+                        },
+                        {
+                            "displaytext": "Nothing, it smells rank in here, I'm off.",
+                            "action": "shop:leave"
+                        }
+                    ]
+                },
+                "leave": {
+                    "lines": [
+                        "shopkeeper:goodbye"
+                    ],
+                    "options": [
+                        {
+                            "displaytext": "You leave the store clutching your purchases in one hand and holding your nose with the other.",
+                            "action": "page1:root"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
