@@ -1,27 +1,29 @@
 {
-    "scenario": "The Dark Journey of Bob Wilkins",
+    "scenario": "bobwilkins",
+    "title": "The Dark Journey of Bob Wilkins",
     "scripts": {
         "title": {
-            "type": "title",
-            "titletext": "The Dark Journey of Bob Wilkins",
+            "locationdata": {
+                "type": "title",
+                "titletext": "The Dark Journey of Bob Wilkins"
+            },
             "actions": {
                 "root": {
                     "options": [
                         {
                             "displaytext": "Start",
-                            "action": "title:start"
+                            "action": "page1:root"
                         }
                     ]
-                },
-                "start": {
-                    "action": "page1:root"
                 }
             }
         },
         "page1": {
-            "type": "story",
-            "chaptertitle": "Ooh, a road!",
-            "storytext": "You find yourself on a road blah, blah, blah",
+            "locationdata": {
+                "type": "story",
+                "chaptertitle": "Ooh, a road!",
+                "storytext": "You find yourself on a road blah, blah, blah"
+            },
             "actions": {
                 "root": {
                     "options": [
@@ -42,35 +44,54 @@
             }
         },
         "shop": {
-            "type": "npc",
-            "locationname": "Barnabus' Mice and Melons",
-            "storytext": "You enter the store, it's a bit pongy. The owner stands behind the counter, a huge smile on his face. He seem's not to notice the smell. Or the discomfort it is causing you.",
+            "locationdata": {
+                "type": "npc",
+                "name": "Barnabus' Mice and Melons"
+            },
             "npcs": {
+                "narrator": {
+                    "name": "",
+                    "lines": {
+                        "enter": {
+                            "text": "You enter the store, it's a bit pongy. The owner stands behind the counter, a huge smile on his face. He seem's not to notice the smell. Or the discomfort it is causing you."
+                        },
+                        "leave": {
+                            "text": "You leave the store clutching your purchases in one hand and holding your nose with the other."
+                        }
+                    }
+                },
                 "shopkeeper": {
                     "name": "Barnabus",
-                    "scripts": {
+                    "lines": {
                         "welcome": {
-                            "displaytext": "Hey there sport, looking to buy some local specialities?"
+                            "text": "Hey there sport, looking to buy some local specialities?"
                         },
                         "goodbye": {
-                            "displaytext": "Welp, sorry to see you leave, take care now."
+                            "text": "Welp, sorry to see you leave, take care now."
                         },
-                        "buymelons": {
-                            "displaytext": "Here you go fella', I used to make lewd comments after I sells these, the wife made me stop though. \"Not professional\" she said. Sigh."
+                        "buymelon": {
+                            "text": "Here you go fella', I used to make lewd comments after I sells these, the wife made me stop though. \"Not professional\" she said. Sigh."
                         },
                         "buynails": {
-                            "displaytext": "You'll not find better nails round these parts. Not since \"Quality Nails and Foot Spas\" closed down. Sigh."
+                            "text": "You'll not find better nails round these parts. Not since \"Quality Nails and Foot Spas\" closed down. Sigh."
                         },
                         "buysmallmouse": {
-                            "displaytext": "Aww, He's such a cutey. I'm going to miss you, yes I am, I'll miss you loads. Take good care of him. *sniff*"
+                            "text": "Aww, He's such a cutey. I'm going to miss you, yes I am, I'll miss you loads. Take good care of him. *sniff*"
                         }
                     }
                 }
             },
             "actions": {
                 "root": {
-                    "lines": [
-                        "shopkeeper:welcome"
+                    "dialog": [
+                        {
+                            "npc": "narrator",
+                            "line": "enter"
+                        },
+                        {
+                            "npc": "shopkeeper",
+                            "line": "welcome"
+                        }
                     ],
                     "optiontext": "What will you buy?",
                     "options": [
@@ -93,8 +114,11 @@
                     ]
                 },
                 "buymelon": {
-                    "lines": [
-                        "shopkeeper:buymelons"
+                    "dialog": [
+                        {
+                            "npc": "shopkeeper",
+                            "line": "buymelon"
+                        }
                     ],
                     "optiontext": "What will you buy?",
                     "options": [
@@ -117,8 +141,11 @@
                     ]
                 },
                 "buynails": {
-                    "lines": [
-                        "shopkeeper:buynails"
+                    "dialog": [
+                        {
+                            "npc": "shopkeeper",
+                            "line": "buynails"
+                        }
                     ],
                     "optiontext": "What will you buy?",
                     "options": [
@@ -141,8 +168,11 @@
                     ]
                 },
                 "buysmallmouse": {
-                    "lines": [
-                        "shopkeeper:buysmallmouse"
+                    "dialog": [
+                        {
+                            "npc": "shopkeeper",
+                            "line": "buysmallmouse"
+                        }
                     ],
                     "optiontext": "What will you buy?",
                     "options": [
@@ -165,12 +195,19 @@
                     ]
                 },
                 "leave": {
-                    "lines": [
-                        "shopkeeper:goodbye"
+                    "dialog": [
+                        {
+                            "npc": "shopkeeper",
+                            "line": "goodbye"
+                        },
+                        {
+                            "npc": "narrator",
+                            "line": "leave"
+                        }
                     ],
                     "options": [
                         {
-                            "displaytext": "You leave the store clutching your purchases in one hand and holding your nose with the other.",
+                            "displaytext": "Goodbye",
                             "action": "page1:root"
                         }
                     ]

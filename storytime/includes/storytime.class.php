@@ -3,7 +3,30 @@
 
 class StoryTime {
     public function __construct() {
-        add_shortcode('md-story-time', array($this, 'process_game_state'));
+        $this->load_dependencies();
+        add_shortcode('md-story-time', array($this, 'set_up_short_code'));
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
+
+        $rest_manager = new StorytimeRest();
+    }
+
+    public function load_dependencies() {
+        require_once plugin_dir_path( __FILE__ ) . 'storytime-rest.class.php';
+    }
+
+    public function enqueue_scripts() {
+        wp_enqueue_script('st-location', plugins_url('js/stlocation.class.js', dirname(__FILE__)));
+        wp_enqueue_script('st-nottypingtest', plugins_url('js/stnottypingtest.class.js', dirname(__FILE__)), array('st-location'));
+        wp_enqueue_script('st-title', plugins_url('js/sttitle.class.js', dirname(__FILE__)), array('st-location'));
+        wp_enqueue_script('st-story', plugins_url('js/ststory.class.js', dirname(__FILE__)), array('st-location'));
+        wp_enqueue_script('st-engine', plugins_url('js/stengine.class.js', dirname(__FILE__)), array('st-nottypingtest', 'st-title', 'st-story'));
+        wp_enqueue_script('st-loader', plugins_url('js/storytime.js', dirname(__FILE__)), array('st-nottypingtest', 'jquery'));
+    }
+
+    public function set_up_short_code() {
+        $rest_nonce = esc_attr( wp_create_nonce( 'wp_rest' ) );
+        $base_api_url = home_url('wp-json/storytime/v1');
+        return "<div id='storytime-container' data-rest-nonce='$rest_nonce' data-rest-baseapi='$base_api_url'></div>";
     }
 
     public function process_game_state() {
